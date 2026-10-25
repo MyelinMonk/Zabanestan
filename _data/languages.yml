@@ -10,8 +10,6 @@
 #   level          1 vulnerable, 2 definitely, 3 severely, 4 critically endangered (UNESCO scale)
 #   branch, spoken_in, script, iso   the other columns of the table
 #   note           optional extra line under the name
-#
-# Keep text in double quotes. Indent with two spaces, never tabs.
 
 - id: yaghnobi
   name: "Yaghnobi"
