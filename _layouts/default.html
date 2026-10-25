@@ -1,9 +1,5 @@
 <!doctype html>
 <html lang="en">
-{%- comment -%}
-  Links are relative ("styles.css"), so the site works at any address.
-  The 404 page can be shown at any depth, so it uses the site's base path instead.
-{%- endcomment -%}
 {%- if page.url == "/404.html" -%}
   {%- assign root = site.baseurl | append: "/" -%}
   {%- assign home = root -%}
