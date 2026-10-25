@@ -1,0 +1,53 @@
+---
+layout: default
+title: Languages
+description: "Zabanestan’s core roster: endangered and vulnerable Iranic languages, ranked by urgency."
+---
+{%- comment -%} The roster itself lives in _data/languages.yml. {%- endcomment -%}
+{%- assign language_count = site.data.languages | size -%}
+<section class="page-intro">
+  <div class="wrap">
+    <h1>Languages</h1>
+    <p class="lead">Our core roster lists {{ language_count }} endangered and vulnerable languages, ranked by urgency: how endangered each language is first, then how little learning material exists for it.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap stack">
+    <p class="legend"><span class="legend-title">UNESCO’s scale, from least to most endangered:</span>
+      {%- for lv in site.data.levels -%}<span class="item">{% include meter.html level=lv.level %}{{ lv.label }}</span>{%- endfor -%}
+    </p>
+    <div class="table-wrap">
+<table class="roster" role="table">
+  <caption class="visually-hidden">Core roster, ranked by urgency</caption>
+  <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Rank</th><th scope="col" role="columnheader">Language</th><th scope="col" role="columnheader">Branch</th><th scope="col" role="columnheader">Spoken in</th><th scope="col" role="columnheader">Script</th><th scope="col" role="columnheader">ISO 639-3</th></tr></thead>
+  {%- assign rank = 0 -%}
+  {%- assign groups = site.data.levels | reverse -%}
+  {%- for lv in groups -%}
+  {%- assign members = site.data.languages | where: "level", lv.level -%}
+  {%- if members.size > 0 %}
+  <tbody role="rowgroup">
+    <tr class="group" role="row"><th colspan="6" scope="colgroup" role="columnheader"><span class="group-label">{% include meter.html level=lv.level %}{{ lv.label }}</span><span class="group-count">{{ members.size }} {% if members.size == 1 %}language{% else %}languages{% endif %}</span></th></tr>
+    {%- for lang in members -%}
+    {%- assign rank = rank | plus: 1 %}
+    <tr class="row" id="{{ lang.id }}" role="row"><td class="rank" role="cell">{{ rank }}</td><td class="lang" role="cell"><span class="lang-en">{{ lang.name }}</span>{% include native-name.html lang=lang class="lang-native" %}{% if lang.note %}<span class="note">{{ lang.note }}</span>{% endif %}</td><td class="meta" data-label="Branch" role="cell">{{ lang.branch }}</td><td class="meta" data-label="Spoken in" role="cell">{{ lang.spoken_in }}</td><td class="meta" data-label="Script" role="cell">{{ lang.script }}</td><td class="iso" data-label="ISO 639-3" role="cell">{{ lang.iso }}</td></tr>
+    {%- endfor %}
+  </tbody>
+  {%- endif -%}
+  {%- endfor %}
+</table>
+    </div>
+    <p class="source-note">Resource pages for each language are currently undergoing maintenance and will be available in the near future. Endangerment levels follow UNESCO’s scale and draw on the UNESCO atlases, Glottolog and Encyclopaedia Iranica. Codes are ISO 639-3. Last reviewed {{ site.roster_reviewed }}.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="prose">
+      <h2>Other languages we study</h2>
+      <p>Members also study languages of the wider Persianate world that don’t meet our endangerment criteria: Tajik, Tehrani Persian, Azerbaijani, Qashqai, Shirazi and Elamite. Members can study them with us, but they aren’t a priority for our public materials.</p>
+      <h2>Missing a language, or found an error?</h2>
+      <p>Email <a href="mailto:{{ site.email }}">{{ site.email }}</a>, with a source if you have one. Changes to the roster are made by the core team.</p>
+    </div>
+  </div>
+</section>

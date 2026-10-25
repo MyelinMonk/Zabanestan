@@ -1,0 +1,227 @@
+# Core roster, in priority order. The order in this file is the ranking on the site;
+# the site groups languages by endangerment level automatically.
+#
+# Fields for each language:
+#   id             short name used in links, e.g. languages.html#yaghnobi (lowercase, no spaces)
+#   name           English name
+#   native         name in the language's own script (leave the line out if unsure)
+#   native_lang    language code for the native name, which helps screen readers
+#   native_script  Arab for right-to-left Arabic script; Cyrl or Latn otherwise
+#   level          1 vulnerable, 2 definitely, 3 severely, 4 critically endangered (UNESCO scale)
+#   branch, spoken_in, script, iso   the other columns of the table
+#   note           optional extra line under the name
+#
+# Keep text in double quotes. Indent with two spaces, never tabs.
+
+- id: yaghnobi
+  name: "Yaghnobi"
+  native: "Яғнобӣ зивок"
+  native_lang: yai
+  native_script: Cyrl
+  level: 3
+  branch: "Eastern Iranian, Sogdian lineage"
+  spoken_in: "Tajikistan (Yaghnob Valley)"
+  script: "Cyrillic, Latin, Arabic"
+  iso: "yai"
+
+- id: wakhi
+  name: "Wakhi"
+  native: "ښیکوار"
+  native_lang: wbl
+  native_script: Arab
+  level: 3
+  branch: "Eastern Iranian, Pamir"
+  spoken_in: "Afghanistan, Tajikistan, Pakistan, China"
+  script: "Arabic, Cyrillic, Latin"
+  iso: "wbl"
+  note: "Assessments range from severely to definitely endangered"
+
+- id: southern-kurdish
+  name: "Southern Kurdish"
+  level: 2
+  branch: "Northwestern Iranian, Kurdish"
+  spoken_in: "Iran, Iraq"
+  script: "Arabic"
+  iso: "sdh"
+
+- id: rushani
+  name: "Rushani"
+  level: 2
+  branch: "Eastern Iranian, Pamir"
+  spoken_in: "Tajikistan, Afghanistan"
+  script: "Cyrillic, Latin (recent)"
+  iso: "—"
+  note: "Often classed as a dialect of Shughni, and has no ISO code of its own"
+
+- id: ossetian
+  name: "Ossetian"
+  native: "ирон ӕвзаг"
+  native_lang: os
+  native_script: Cyrl
+  level: 2
+  branch: "Eastern Iranian, Scytho-Sarmatian"
+  spoken_in: "Central Caucasus"
+  script: "Cyrillic"
+  iso: "oss"
+
+- id: balochi
+  name: "Balochi"
+  native: "بلوچی"
+  native_lang: bal
+  native_script: Arab
+  level: 2
+  branch: "Northwestern Iranian"
+  spoken_in: "Pakistan, Iran, Afghanistan, Oman"
+  script: "Arabic, Latin"
+  iso: "bal"
+
+- id: laki
+  name: "Laki"
+  native: "لەکی"
+  native_lang: lki
+  native_script: Arab
+  level: 2
+  branch: "Northwestern Iranian"
+  spoken_in: "Western Iran"
+  script: "Arabic"
+  iso: "lki"
+
+- id: achomi
+  name: "Achomi"
+  native: "اچُمی"
+  native_lang: lrl
+  native_script: Arab
+  level: 2
+  branch: "Southwestern Iranian"
+  spoken_in: "Southern Iran and Gulf communities"
+  script: "Arabic"
+  iso: "lrl"
+  note: "Also called Larestani or Khodmooni"
+
+- id: kate
+  name: "Katë"
+  level: 2
+  branch: "Nuristani"
+  spoken_in: "Afghanistan (Nuristan), Pakistan (Chitral)"
+  script: "Rarely written"
+  iso: "bsh, xvi"
+  note: "Also called Kati or Kamkata-vari"
+
+- id: sarikoli
+  name: "Sarikoli"
+  level: 2
+  branch: "Eastern Iranian, Pamir"
+  spoken_in: "China (Tashkurgan), Pakistan"
+  script: "Mostly unwritten"
+  iso: "srh"
+
+- id: shughni
+  name: "Shughni"
+  level: 2
+  branch: "Eastern Iranian, Pamir"
+  spoken_in: "Tajikistan, Afghanistan"
+  script: "Cyrillic, Latin, Arabic"
+  iso: "sgh"
+
+- id: gorani
+  name: "Gorani"
+  native: "گۆرانی"
+  native_lang: hac
+  native_script: Arab
+  level: 2
+  branch: "Northwestern Iranian, Zaza–Gorani"
+  spoken_in: "Iran, Iraq (Hawraman)"
+  script: "Arabic"
+  iso: "hac"
+  note: "Its main dialect is Hawrami"
+
+- id: mazandarani
+  name: "Mazandarani"
+  native: "مازِرونی"
+  native_lang: mzn
+  native_script: Arab
+  level: 2
+  branch: "Northwestern Iranian, Caspian"
+  spoken_in: "Northern Iran (Mazandaran)"
+  script: "Arabic"
+  iso: "mzn"
+
+- id: zazaki
+  name: "Zazaki"
+  native: "Zazakî"
+  native_lang: zza
+  native_script: Latn
+  level: 1
+  branch: "Northwestern Iranian, Zaza–Gorani"
+  spoken_in: "Eastern Turkey"
+  script: "Latin"
+  iso: "zza"
+
+- id: luri
+  name: "Luri"
+  native: "لری"
+  native_lang: lrc
+  native_script: Arab
+  level: 1
+  branch: "Southwestern Iranian"
+  spoken_in: "Western Iran (Zagros)"
+  script: "Arabic"
+  iso: "lrc, luz"
+
+- id: taleshi
+  name: "Taleshi"
+  native: "Tolışə Zıvon"
+  native_lang: tly
+  native_script: Latn
+  level: 1
+  branch: "Northwestern Iranian"
+  spoken_in: "Northern Iran, southern Azerbaijan"
+  script: "Arabic, Latin"
+  iso: "tly"
+  note: "Also spelled Talysh"
+
+- id: sorani
+  name: "Central Kurdish"
+  native: "سۆرانی"
+  native_lang: ckb
+  native_script: Arab
+  level: 1
+  branch: "Northwestern Iranian, Kurdish"
+  spoken_in: "Iraq, Iran"
+  script: "Arabic"
+  iso: "ckb"
+  note: "Also called Sorani"
+
+- id: kurmanji
+  name: "Northern Kurdish"
+  native: "Kurmancî"
+  native_lang: kmr
+  native_script: Latn
+  level: 1
+  branch: "Northwestern Iranian, Kurdish"
+  spoken_in: "Turkey, Syria, Iraq, Iran"
+  script: "Latin, Arabic"
+  iso: "kmr"
+  note: "Also called Kurmanji"
+
+- id: hazaragi
+  name: "Hazaragi"
+  native: "هزارگی"
+  native_lang: haz
+  native_script: Arab
+  level: 1
+  branch: "Southwestern Iranian"
+  spoken_in: "Afghanistan, Pakistan, Iran"
+  script: "Arabic"
+  iso: "haz"
+
+- id: gilaki
+  name: "Gilaki"
+  native: "گیلکی"
+  native_lang: glk
+  native_script: Arab
+  level: 1
+  branch: "Northwestern Iranian, Caspian"
+  spoken_in: "Northern Iran (Gilan)"
+  script: "Arabic"
+  iso: "glk"

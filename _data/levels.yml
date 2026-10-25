@@ -1,0 +1,10 @@
+# UNESCO's endangerment scale, from least to most endangered.
+# The Languages page lists the most endangered groups first.
+- level: 1
+  label: "Vulnerable"
+- level: 2
+  label: "Definitely endangered"
+- level: 3
+  label: "Severely endangered"
+- level: 4
+  label: "Critically endangered"

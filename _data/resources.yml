@@ -1,0 +1,43 @@
+# Links on the Resources page. Each list shows in the order written here.
+
+wikipedias:
+  - name: "Ossetian Wikipedia"
+    url: https://os.wikipedia.org
+  - name: "Mazandarani Wikipedia"
+    url: https://mzn.wikipedia.org
+  - name: "Gilaki Wikipedia"
+    url: https://glk.wikipedia.org
+  - name: "Central Kurdish Wikipedia"
+    url: https://ckb.wikipedia.org
+  - name: "Northern Kurdish Wikipedia"
+    url: https://ku.wikipedia.org
+  - name: "Zazaki Wikipedia"
+    url: https://diq.wikipedia.org
+
+references:
+  - name: "UNESCO World Atlas of Languages"
+    url: https://en.wal.unesco.org/
+    description: "UNESCO’s online atlas of the world’s languages and how widely each is used."
+  - name: "Glottolog"
+    url: https://glottolog.org
+    description: "A catalogue of the world’s languages, families and dialects, with references for each."
+  - name: "Encyclopaedia Iranica"
+    url: https://www.iranicaonline.org
+    description: "A scholarly encyclopedia of Iranian history, cultures and languages, free to read online."
+  - name: "Atlas of the Languages of Iran"
+    url: https://iranatlas.net
+    description: "Interactive maps of where Iran’s languages are spoken, from Carleton University."
+
+archives:
+  - name: "Endangered Languages Archive (ELAR)"
+    url: https://www.elararchive.org
+    description: "Preserves recordings of endangered languages and accepts collections from community members."
+  - name: "Living Dictionaries"
+    url: https://livingdictionaries.app
+    description: "A free platform from the Living Tongues Institute for building multimedia dictionaries together."
+  - name: "Wikitongues"
+    url: https://wikitongues.org
+    description: "Archives videos of people speaking their languages and supports revitalization projects."
+  - name: "Mozilla Common Voice"
+    url: https://commonvoice.mozilla.org
+    description: "An open dataset of recorded speech that any language community can add to."

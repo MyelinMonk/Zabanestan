@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+{%- comment -%}
+  Links are relative ("styles.css"), so the site works at any address.
+  The 404 page can be shown at any depth, so it uses the site's base path instead.
+{%- endcomment -%}
+{%- if page.url == "/404.html" -%}
+  {%- assign root = site.baseurl | append: "/" -%}
+  {%- assign home = root -%}
+{%- else -%}
+  {%- assign root = "" -%}
+  {%- assign home = "./" -%}
+{%- endif -%}
+{%- if page.url == "/" -%}
+  {%- assign full_title = site.title -%}
+{%- else -%}
+  {%- capture full_title -%}{{ page.title }} | {{ site.title }}{%- endcapture -%}
+{%- endif -%}
+{%- assign page_description = page.description | default: site.description | strip %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ full_title }}</title>
+<meta name="description" content="{{ page_description | escape }}">
+<meta property="og:title" content="{{ full_title | escape }}">
+<meta property="og:description" content="{{ page_description | escape }}">
+<meta property="og:type" content="website">
+{%- if site.hide_from_search_engines %}
+<meta name="robots" content="noindex">
+{%- endif %}
+<meta name="theme-color" content="#15275c">
+<link rel="icon" href="{{ root }}favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ root }}styles.css">
+</head>
+<body>
+{% include header.html %}
+<main id="main">
+{{ content }}
+</main>
+{% include footer.html %}
+</body>
+</html>

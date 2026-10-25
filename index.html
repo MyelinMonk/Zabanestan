@@ -1,0 +1,92 @@
+---
+layout: default
+title: Home
+---
+{%- assign language_count = site.data.languages | size -%}
+<section class="band" aria-labelledby="hero-title">
+  <div class="wrap band-inner">
+    <ul class="names" aria-label="Languages on our roster, in their own words">
+      {%- for lang in site.data.languages %}{% if lang.native %}
+      <li><a href="languages.html#{{ lang.id }}">{% include native-name.html lang=lang class="native" %}<span class="gloss">{{ lang.name }}</span></a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+    <div class="hero-text">
+      <h1 id="hero-title">We document, preserve and teach endangered Iranic languages</h1>
+      <p>Zabanestan is a volunteer community focused on {{ language_count }} languages, from Zazaki in eastern Anatolia to Wakhi in the Pamirs. We work with speakers, and everything we make is free to use and share.</p>
+      <div class="actions">
+        <a class="button button-primary" href="get-involved.html">Get involved</a>
+        <a class="button button-secondary" href="languages.html">See the {{ language_count }} languages</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="make">
+  <div class="wrap stack">
+    <div class="section-head">
+      <h2 id="make">What we make</h2>
+      <p>Every finished piece is published somewhere built to last.</p>
+    </div>
+    <dl class="terms">
+      <dt>Learning materials</dt>
+      <dd>Lessons, vocabulary decks, learning software and bilingual readers, written by our team and openly licensed.</dd>
+      <dt>Reference resources</dt>
+      <dd>Bibliographies, word lists and dictionaries built from several sources and checked with speakers.</dd>
+      <dt>Documentation</dt>
+      <dd>Recordings of speakers with transcriptions and translations, made with consent and deposited in a recognized archive.</dd>
+      <dt>Translation projects</dt>
+      <dd>Classical and modern texts brought into English.</dd>
+      <dt>Community</dt>
+      <dd>Classes, study groups and social media, where members learn, practice and discuss together.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="urgent">
+  <div class="wrap stack">
+    <div class="section-head">
+      <h2 id="urgent">Where help is needed most</h2>
+      <p>The top of our roster, ranked by how endangered each language is and how little learning material exists for it.</p>
+    </div>
+    <ol class="urgent">
+      {%- assign rank = 0 -%}
+      {%- assign groups = site.data.levels | reverse -%}
+      {%- for lv in groups -%}
+      {%- assign members = site.data.languages | where: "level", lv.level -%}
+      {%- for lang in members -%}
+      {%- assign rank = rank | plus: 1 -%}
+      {%- if rank <= 5 %}
+      <li><span class="rank">{{ rank }}</span><span class="lang"><a href="languages.html#{{ lang.id }}">{{ lang.name }}</a>{% if lang.native %} {% include native-name.html lang=lang class="lang-native" %}{% endif %}</span><span class="where">{{ lang.spoken_in }}</span><span class="level">{% include meter.html level=lv.level %}{{ lv.label }}</span></li>
+      {%- endif -%}
+      {%- endfor -%}
+      {%- endfor %}
+    </ol>
+    <p class="more"><a href="languages.html">See all {{ language_count }} languages</a></p>
+    <p>Speak one of these languages? <a href="{{ site.consent_form | escape }}">Record with us, on your terms.</a></p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="how">
+  <div class="wrap stack">
+    <h2 id="how">How we work</h2>
+    <div class="principles">
+      <div>
+        <h3>Speakers first</h3>
+        <p>Native speakers and heritage communities shape decisions about their own languages, and they’re credited for their work.</p>
+      </div>
+      <div>
+        <h3>Consent before recording</h3>
+        <p>No one is recorded, quoted or credited without informed consent. Speakers choose how they’re named and who can hear them.</p>
+      </div>
+      <div>
+        <h3>Open by default</h3>
+        <p>What we create is free to use and share under CC BY-SA 4.0, and we don’t post other people’s copyrighted work without permission.</p>
+      </div>
+      <div>
+        <h3>Built to last</h3>
+        <p>Finished work goes to archives and open platforms that will outlast any one of us and any single platform.</p>
+      </div>
+    </div>
+    <p class="more"><a href="about.html">More about how we work</a></p>
+  </div>
+</section>

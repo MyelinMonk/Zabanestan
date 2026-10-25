@@ -1,0 +1,18 @@
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="{{ home }}"{% if page.url == "/" %} aria-current="page"{% endif %}>
+      <span class="wordmark-latin">{{ site.title }}</span>
+      <span class="wordmark-arab" lang="fa" dir="rtl" aria-hidden="true">{{ site.title_native }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        {%- for item in site.data.navigation %}
+        {%- assign item_path = "/" | append: item.url %}
+        <li><a href="{{ root }}{{ item.url }}"{% if page.url == item_path %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    <a class="button button-primary header-cta" href="mailto:{{ site.email }}">Email us</a>
+  </div>
+</header>

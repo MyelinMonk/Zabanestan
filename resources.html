@@ -1,0 +1,77 @@
+---
+layout: default
+title: Resources
+description: "Reference works, archives and open reading for endangered Iranic languages, and what Zabanestan shares."
+---
+{%- comment -%} The links on this page live in _data/resources.yml. {%- endcomment -%}
+<section class="page-intro">
+  <div class="wrap">
+    <h1>Resources</h1>
+    <p class="lead">We point you to good material instead of copying it, and we share only what we have the right to share.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="prose">
+      <h2>Language resource pages</h2>
+      <div class="callout"><p>Our language resource pages are currently undergoing maintenance and will be available in the near future.</p></div>
+      <p>When they return, each page will cite its sources and link only to the publisher, the author, a library or an open repository.</p>
+      <p>Know a good resource for one of our languages? Email it to <a href="mailto:{{ site.email }}">{{ site.email }}</a> with a full citation: author, title, year and publisher.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="wikis">
+  <div class="wrap stack">
+    <div class="section-head">
+      <h2 id="wikis">Read Wikipedia in our languages</h2>
+      <p>Of the languages on our roster, {{ site.data.resources.wikipedias | size }} have their own Wikipedia, written by volunteers and openly licensed.</p>
+    </div>
+    <ul class="links cols">
+      {%- for item in site.data.resources.wikipedias %}
+      <li><a href="{{ item.url }}">{{ item.name }}</a><span class="url">{{ item.url | remove: "https://" | remove: "http://" }}</span></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="pair">
+      <div>
+        <h2 id="reference">Reference works</h2>
+        <ul class="links">
+          {%- for item in site.data.resources.references %}
+          <li><a href="{{ item.url }}">{{ item.name }}</a><p>{{ item.description }}</p></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      <div>
+        <h2 id="archives">Archives and open platforms</h2>
+        <ul class="links">
+          {%- for item in site.data.resources.archives %}
+          <li><a href="{{ item.url }}">{{ item.name }}</a><p>{{ item.description }}</p></li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="posting">
+  <div class="wrap">
+    <div class="prose">
+      <h2 id="posting">What we post, and what we don’t</h2>
+      <p>We publish only:</p>
+      <ul>
+        <li>our own work, under CC BY-SA 4.0</li>
+        <li>works in the public domain</li>
+        <li>openly licensed works, on their own terms</li>
+        <li>material we have written permission to share</li>
+      </ul>
+      <p>We don’t post scans or files of copyrighted books, and we don’t link to sites that host them without permission. Our own materials take facts from published sources and explain them in our own words, citing every source.</p>
+      <p>To ask us to remove your own material, email <a href="mailto:{{ site.email }}">{{ site.email }}</a>. We review the request, take the material down and reply within 7 days.</p>
+    </div>
+  </div>
+</section>

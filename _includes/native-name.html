@@ -1,0 +1,8 @@
+{%- assign nn = include.lang -%}
+{%- if nn.native -%}
+{%- if nn.native_script == "Arab" -%}
+<span class="{{ include.class }} ar" lang="{{ nn.native_lang }}" dir="rtl">{{ nn.native }}</span>
+{%- else -%}
+<span class="{{ include.class }}" lang="{{ nn.native_lang }}">{{ nn.native }}</span>
+{%- endif -%}
+{%- endif -%}
