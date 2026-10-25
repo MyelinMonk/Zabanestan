@@ -1,4 +1,4 @@
-# Site settings. Change a value here and every page updates.
+# Site settings
 
 title: Zabanestan
 title_native: زبانستان
@@ -8,15 +8,13 @@ description: >-
 
 # Contact and links
 email: zabanestanteam@gmail.com
-discord_invite: https://discord.gg/REPLACE-WITH-YOUR-INVITE
+discord_invite: https://discord.gg/qdJgWNzT6B
 consent_form: "https://docs.google.com/forms/d/e/1FAIpQLSe_UjFNePyq60NqY6feaMXH6506BA-dZg6EBP72vlKYCIYf5w/viewform?usp=sharing&ouid=110992328511529191717"
 
-# Dates shown on the site
+# Dates
 last_updated: October 2026
 roster_reviewed: July 2026
 
-# This copy is a sandbox, so it asks search engines not to list it.
-# Change to false if this ever becomes the real public site.
 hide_from_search_engines: true
 
 markdown: kramdown
