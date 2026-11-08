@@ -13,6 +13,6 @@
         {%- endfor %}
       </ul>
     </nav>
-    <a class="button button-primary header-cta" href="mailto:{{ site.email }}">Email us</a>
+    <a class="button button-primary header-cta" href="{{ root }}contact.html"{% if page.url == "/contact.html" %} aria-current="page"{% endif %}>Contact us</a>
   </div>
 </header>

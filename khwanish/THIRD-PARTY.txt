@@ -1,0 +1,27 @@
+Khwānish reader: third-party parts
+==================================
+
+The reader's own code is under the MIT License (LICENSE.txt). It ships with:
+
+pdf.js 3.11.174, lib/pdfjs/
+  Reads PDFs. Copyright Mozilla Foundation. Apache License 2.0, lib/pdfjs/LICENSE.txt.
+
+sql.js 1.10.3, lib/sql.js/
+  Builds Anki packages. Copyright (c) 2017 sql.js authors (lib/sql.js/AUTHORS.txt).
+  MIT License, lib/sql.js/LICENSE.txt. sql.js is SQLite compiled to JavaScript; SQLite is in the public domain.
+
+supabase-js 2.119.0, lib/supabase/
+  Signs people in and talks to the accounts database, when the site has accounts.
+  Copyright (c) 2020 Supabase. MIT License, lib/supabase/LICENSE.txt.
+
+Fonts, fonts/
+  IBM Plex Sans and IBM Plex Sans Arabic, copyright 2019 IBM Corp.
+  Noto Serif, Noto Sans, Noto Naskh Arabic, Noto Sans Arabic, Noto Nastaliq Urdu, Noto Serif and
+  Sans Hebrew, Noto Serif and Sans Devanagari, copyright The Noto Project Authors.
+  All under the SIL Open Font License 1.1, fonts/OFL.txt. Packaged by Fontsource (fontsource.org).
+  khwanish-mark.woff2 is Noto Nastaliq Urdu cut down to the letters of the wordmark.
+
+Sample texts
+  The sample texts (Saadi, Rudaki, La Fontaine, the Dhammapada, the Bhagavad Gītā) are in the public domain.
+
+Dictionary links open other websites, which have their own terms. Khwānish isn't affiliated with them.

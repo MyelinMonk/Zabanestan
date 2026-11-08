@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khwānish Reader</title>
+<!--head-extra-->
+<!--fonts-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@600&amp;text=%D8%AE%D9%88%D8%A7%D9%86%D8%B4&amp;display=swap">
+<link rel="stylesheet" data-font="serif" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&amp;family=Noto+Naskh+Arabic:wght@400;600&amp;family=Noto+Serif+Hebrew:wght@400;600&amp;family=Noto+Serif+Devanagari:wght@400;600&amp;display=swap">
+<!--/fonts-->
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#library" aria-label="Khwānish, go to library"><span class="mark" lang="fa" aria-hidden="true">خوانش</span><span class="name">Khwānish</span></a>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#library" data-r="library"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A1.5 1.5 0 015.5 3H20v16H5.5A1.5 1.5 0 004 20.5z"/><path d="M4 20.5A1.5 1.5 0 005.5 22H20"/><path d="M8 7h8"/></svg></span><span>Library</span></a>
+    <a href="#review" data-r="review"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="13" rx="2"/><path d="M7 3h12a2 2 0 012 2v12"/></svg></span><span>Review</span><b class="badge" id="dueBadge" hidden></b></a>
+    <a href="#words" data-r="words"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg></span><span>Words</span></a>
+    <a href="#options" data-r="options"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg></span><span>Options</span></a>
+  </nav>
+  <button class="lang-btn" id="langBtn" type="button" aria-haspopup="dialog" aria-label="Change language"><span id="langName">Persian</span><span class="nat" id="langNative" dir="auto"></span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+  <span class="sync busy" id="syncDot" role="img" aria-label="Connecting to your account" title="Connecting to your account"></span>
+</header>
+<main id="view"></main>
+<div class="sheet-wrap" id="sheetWrap" hidden><div class="sheet" id="sheet" role="dialog" aria-label="Word details"></div></div>
+<div class="modal-wrap" id="modalWrap" hidden><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<!--site-config-->
+<script>
+/*JS*/
+</script>
+</body>
+</html>

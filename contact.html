@@ -1,0 +1,66 @@
+---
+layout: default
+title: Contact us
+description: "Write to the Zabanestan team, or talk with us on Discord."
+---
+<section class="page-intro">
+  <div class="wrap">
+    <h1>Contact us</h1>
+    <p class="lead">Zabanestan is run by volunteers. Write to us by email, or find us on Discord.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap stack">
+    <dl class="terms">
+      <dt>Email</dt>
+      <dd>
+        <p class="contact-address">{{ site.email }}</p>
+        <div class="actions">
+          <button class="button button-primary" type="button" data-copy="{{ site.email | escape }}" hidden>Copy the address</button>
+          <a class="button button-secondary" href="mailto:{{ site.email }}">Open your email app</a>
+        </div>
+      </dd>
+      <dt>Discord</dt>
+      <dd>Classes, study groups and everyday questions happen on <a href="{{ site.discord_invite }}">our Discord server</a>. Say hello in the server and the team can help you there.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="what-to-write">
+  <div class="wrap stack">
+    <div class="prose">
+      <h2 id="what-to-write">What to include</h2>
+      <p>A few details help us answer sooner.</p>
+    </div>
+    <dl class="terms">
+      <dt>Volunteering</dt>
+      <dd>Which language you speak or want to learn, and how you’d like to help. <a href="get-involved.html">Get involved</a> lists where help counts most.</dd>
+      <dt>Corrections</dt>
+      <dd>The page and what needs changing, with a source if you have one. Changes to <a href="languages.html">the roster</a> are made by the core team.</dd>
+      <dt>Suggesting a resource</dt>
+      <dd>A full citation: author, title, year and publisher.</dd>
+      <dt>Takedown requests</dt>
+      <dd>The material and where it appears. We review the request, take the material down and reply within 7 days.</dd>
+      <dt>The reader</dt>
+      <dd>What you were doing when something went wrong, and which device and browser you use. See also the <a href="reader.html">reader guide</a>.</dd>
+    </dl>
+  </div>
+</section>
+
+<script>
+  // Copying needs a script and a secure page, so the button only appears where it can work.
+  document.querySelectorAll("[data-copy]").forEach(function (button) {
+    if (!navigator.clipboard || !window.isSecureContext) return;
+    button.hidden = false;
+    var label = button.textContent;
+    button.addEventListener("click", function () {
+      navigator.clipboard.writeText(button.dataset.copy).then(function () {
+        button.textContent = "Copied";
+      }, function () {
+        button.textContent = "Select the address above to copy it";
+      });
+      setTimeout(function () { button.textContent = label; }, 2500);
+    });
+  });
+</script>
