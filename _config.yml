@@ -17,6 +17,9 @@ roster_reviewed: July 2026
 
 hide_from_search_engines: true
 
+# The reader (khwanish/). Set to true once accounts are set up: see _khwanish/supabase/SETUP-ACCOUNTS.md
+reader_accounts: false
+
 markdown: kramdown
 kramdown:
   input: GFM

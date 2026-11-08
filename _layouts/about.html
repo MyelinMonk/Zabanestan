@@ -7,6 +7,14 @@ layout: default
     {%- if page.lead %}
     <p class="lead">{{ page.lead }}</p>
     {%- endif %}
+    {%- comment -%} Optional buttons under the intro: a list of label and url in the page's front matter. {%- endcomment -%}
+    {%- if page.actions %}
+    <div class="actions">
+      {%- for item in page.actions %}
+      <a class="button {% if forloop.first %}button-primary{% else %}button-secondary{% endif %}" href="{{ item.url }}">{{ item.label }}</a>
+      {%- endfor %}
+    </div>
+    {%- endif %}
   </div>
 </section>
 
