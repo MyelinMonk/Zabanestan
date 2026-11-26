@@ -3,6 +3,8 @@
 
   ocr      Turn a scanned PDF or photos of pages into a .txt file with kraken.
   prepare  Cut pages into lines and make a correction page (to train a model).
+           Run it again on the same folder to add more pages.
+  remove   Take pages out of a training folder.
   train    Fine-tune a kraken model on the lines you corrected.
   check    Optional: measure how well a model reads pages you set aside.
   stats    Optional: count your corrected lines, where they came from, and what you fixed.
@@ -343,9 +345,9 @@ try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) {}
 for (const l of DATA.lines) {
   const d = document.createElement('div'); d.className = 'line';
   const img = document.createElement('img'); img.src = l.img; img.alt = l.id; img.loading = 'lazy';
-  const inp = document.createElement('input'); inp.dir = DATA.dir; inp.lang = DATA.lang; inp.value = saved[l.id] ?? l.text; inp.dataset.id = l.id;
+  const inp = document.createElement('input'); inp.dir = DATA.dir; inp.lang = DATA.lang; inp.value = saved[l.id] ?? l.fixed ?? l.text; inp.dataset.id = l.id;
   const meta = document.createElement('label'); meta.className = 'meta';
-  const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!(saved['__skip__' + l.id]);
+  const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = (l.id in saved) ? !!saved['__skip__' + l.id] : !!l.skip;
   cb.onchange = () => { d.classList.toggle('skip', cb.checked); store(); };
   d.classList.toggle('skip', cb.checked);
   meta.append(cb, document.createTextNode(' Leave this line out (bad cut, picture, page number) · ' + l.page));
@@ -384,11 +386,21 @@ def cmd_prepare(a):
     from PIL import Image
     out = Path(a.out) if a.out else HERE / "training"
     (out / "lines").mkdir(parents=True, exist_ok=True)
+    data = read_gt(out) or {"id": out.resolve().name, "dir": "ltr" if a.direction == "horizontal-lr" else "rtl", "lang": a.lang, "lines": []}
+    had = len(data["lines"])
+    have = {l["id"].split("::")[0] for l in data["lines"]}
+    if had:
+        print(f"{shown(out)} already has {plural(had, 'line')} on {plural(len(have), 'page')}. "
+              "The new pages are added to them, and your corrections so far are kept.")
     pages = page_images(a.inputs, a.pages, a.dpi, out / "pages")
-    data = {"id": out.resolve().name, "dir": "ltr" if a.direction == "horizontal-lr" else "rtl", "lang": a.lang, "lines": []}
+    added = 0
     for i, (label, img) in enumerate(pages, 1):
-        print(f"[{i}/{len(pages)}] {label}")
         img = Path(img)
+        if img.stem in have:
+            print(f"[{i}/{len(pages)}] {label}: already in this folder, skipped")
+            continue
+        print(f"[{i}/{len(pages)}] {label}")
+        added += 1
         if img.parent != out / "pages":
             dst = out / "pages" / img.name
             shutil.copy(img, dst)
@@ -405,15 +417,81 @@ def cmd_prepare(a):
                 name = f"{img.stem}__{lid}.png"
                 crop.save(out / "lines" / name)
                 data["lines"].append({"id": f"{img.stem}::{lid}", "img": f"lines/{name}", "text": text, "page": label})
-    page = CORRECT_HTML.replace("__DATA__", json.dumps(data, ensure_ascii=False))
-    (out / "correct.html").write_text(page, encoding="utf-8")
+    write_gt(out, data)
     full = out.resolve()
+    if had:
+        print(f"\nAdded {plural(len(data['lines']) - had, 'line')} from {plural(added, 'new page')}.")
     print(f"\n{len(data['lines'])} lines ready in {full}"
           f"\n1. Open {full / 'correct.html'} in your browser and fix the text under each line."
           f"\n   To open it from here, type:  {open_command(full / 'correct.html')}"
           f"\n   (Your edits are remembered in that browser. Tick “Leave this line out” for bad cuts.)"
           f"\n2. Click “Save corrections”, then move corrections.json from your Downloads folder into {full}"
           f"\n3. Run:  python khanesh_tools.py train {shown(full)}" + (f" --base {shown(a.model)}" if a.model else " --base YOUR_MODEL") + " --name my-model")
+
+
+def read_gt(gt):
+    """The lines in a training folder (from its correct.html), with corrections from corrections.json
+    carried along, so they survive a new correct.html even in another browser. None if it's a new folder."""
+    page_file = Path(gt) / "correct.html"
+    if not page_file.exists():
+        return None
+    m = re.search(r"const DATA = (\{.*?\});\n", page_file.read_text(encoding="utf-8"), re.S)
+    if not m:
+        return None
+    data = json.loads(m.group(1))
+    try:
+        corr = json.loads((Path(gt) / "corrections.json").read_text(encoding="utf-8")).get("lines", {})
+    except (OSError, ValueError):
+        corr = {}
+    for l in data["lines"]:
+        if l["id"] in corr:
+            l.pop("fixed", None); l.pop("skip", None)
+            if corr[l["id"]] is None:
+                l["skip"] = True
+            else:
+                l["fixed"] = corr[l["id"]]
+    return data
+
+
+def write_gt(gt, data):
+    page = CORRECT_HTML.replace("__DATA__", json.dumps(data, ensure_ascii=False))
+    (Path(gt) / "correct.html").write_text(page, encoding="utf-8")
+
+
+def cmd_remove(a):
+    gt = find(a.folder)
+    data = read_gt(gt)
+    if not data:
+        die(f"{shown(gt)} has no correct.html. Point to a folder made by 'prepare'.")
+    by_stem = {}
+    for l in data["lines"]:
+        by_stem.setdefault(l["id"].split("::")[0], l.get("page") or l["id"].split("::")[0])
+    gone = set()
+    nums = set(parse_pages(a.pages, 100000)) if a.pages else set()
+    for stem, label in by_stem.items():
+        m = re.match(r"^(.*) page (\d+)$", label)
+        if m and int(m.group(2)) in nums and (not a.book or m.group(1) == Path(a.book).name):
+            gone.add(stem)
+        if label in a.names or stem in {Path(n).stem for n in a.names}:
+            gone.add(stem)
+    if not gone:
+        die("None of those pages are in this folder. 'stats' lists the pages it has.")
+    data["lines"] = [l for l in data["lines"] if l["id"].split("::")[0] not in gone]
+    for stem in gone:
+        for f in [gt / "pages" / f"{stem}{ext}" for ext in (".png", ".jpg", ".jpeg", ".tif", ".tiff", ".xml")] + list((gt / "lines").glob(f"{stem}__*.png")):
+            if f.exists():
+                f.unlink()
+    corr_path = gt / "corrections.json"
+    if corr_path.exists():
+        c = json.loads(corr_path.read_text(encoding="utf-8"))
+        c["lines"] = {k: v for k, v in c.get("lines", {}).items() if k.split("::")[0] not in gone}
+        corr_path.write_text(json.dumps(c, ensure_ascii=False, indent=1), encoding="utf-8")
+    if (gt / "holdout.txt").exists():
+        keep = [x for x in (gt / "holdout.txt").read_text(encoding="utf-8").splitlines() if x.strip() and x.strip()[:-4] not in gone]
+        (gt / "holdout.txt").write_text("\n".join(keep) + ("\n" if keep else ""), encoding="utf-8")
+    write_gt(gt, data)
+    print(f"Removed {plural(len(gone), 'page')}: " + ", ".join(sorted(by_stem[s] for s in gone)))
+    print(f"{shown(gt)} now has {plural(len(data['lines']), 'line')}. Train again to make a model without them.")
 
 
 # ----------------------------------------------------------------------------
@@ -1022,6 +1100,13 @@ def main():
     pr.add_argument("--dpi", type=int, default=300)
     pr.add_argument("--direction", default="horizontal-rl", choices=["horizontal-rl", "horizontal-lr"])
     pr.set_defaults(fn=cmd_prepare)
+
+    rm = sub.add_parser("remove", help="take pages out of a training folder")
+    rm.add_argument("folder", help="the folder made by 'prepare'")
+    rm.add_argument("names", nargs="*", default=[], help="page images to take out, e.g. scan3.jpg")
+    rm.add_argument("-p", "--pages", help="PDF pages to take out, e.g. 3,7-8")
+    rm.add_argument("--book", help="only from this PDF, when the folder has pages from more than one")
+    rm.set_defaults(fn=cmd_remove)
 
     t = sub.add_parser("train", help="fine-tune a model on your corrected lines")
     t.add_argument("folder", help="the folder made by 'prepare'")

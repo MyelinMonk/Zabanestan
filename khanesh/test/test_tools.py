@@ -264,6 +264,22 @@ check("short names work from another folder too", (home / "elsewhere.txt").exist
 out = run_in(proj, "prepare", "book.png", "--model", "models/persian_best.mlmodel")
 check("prepare makes training/ next to the script, and its next step uses short names",
       (proj / "training" / "correct.html").exists() and "train training --base models/persian_best.mlmodel --name my-model" in out, out)
+# prepare again on the same folder adds pages, keeping corrections; remove takes pages out
+_Img.new("RGB", (400, 120), "white").save(proj / "book2.png")
+(proj / "training" / "corrections.json").write_text(json.dumps({"lines": {kt.read_gt(proj / "training")["lines"][0]["id"]: "تصحیح"}}, ensure_ascii=False), encoding="utf-8")
+first = kt.read_gt(proj / "training")["lines"]
+out = run_in(proj, "prepare", "book2.png", "book.png", "--model", "models/persian_best.mlmodel")
+d2 = kt.read_gt(proj / "training")
+check("prepare adds new pages to an existing folder", len(d2["lines"]) == 2 * len(first) and "already has" in out and "Added" in out, out)
+check("prepare skips pages the folder already has", "book.png: already in this folder, skipped" in out, out)
+check("earlier corrections ride along in the new correct.html", d2["lines"][0].get("fixed") == "تصحیح" and d2["lines"][0]["text"] != "تصحیح", d2["lines"][0])
+check("correct.html prefers what the browser kept, then the carried-over correction", "saved[l.id] ?? l.fixed ?? l.text" in (proj / "training" / "correct.html").read_text(encoding="utf-8"), "")
+out = run_in(proj, "remove", "training", "book2.png")
+d3 = kt.read_gt(proj / "training")
+check("remove takes a page out of correct.html and deletes its files", len(d3["lines"]) == len(first) and not (proj / "training" / "pages" / "book2.xml").exists() and not list((proj / "training" / "lines").glob("book2__*")) and "Removed 1 page" in out, out)
+check("remove keeps the corrections for the other pages", json.loads((proj / "training" / "corrections.json").read_text(encoding="utf-8"))["lines"] and d3["lines"][0].get("fixed") == "تصحیح", d3)
+out = run_in(proj, "remove", "training", "-p", "40")
+check("remove says when the pages aren't there", "None of those pages" in out, out)
 shutil.rmtree(proj.parent); shutil.rmtree(bin_); shutil.rmtree(home)
 shutil.rmtree(fake)
 print(f"\n{len(fails)} failures")
